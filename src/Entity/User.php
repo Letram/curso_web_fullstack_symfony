@@ -3,14 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements \JsonSerializable
+class User implements JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -21,21 +26,30 @@ class User implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=63)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(min=2)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=127)
+     * @Assert\NotBlank
+     * @Assert\Length(min=2)
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(min=2)
      */
     private $password;
 
@@ -57,6 +71,8 @@ class User implements \JsonSerializable
     public function __construct()
     {
         $this->videos = new ArrayCollection();
+        $this->role = "ROLE_GUEST";
+        $this->created_at = new DateTime('now');
     }
 
     public function getId(): ?int
@@ -124,12 +140,12 @@ class User implements \JsonSerializable
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -179,7 +195,7 @@ class User implements \JsonSerializable
             'email'      => $this->email,
             'role'       => $this->role,
             'created_at' => $this->created_at,
-            'password'   => $this->password,
+            //'password'   => $this->password,
             'videos'     => $this->videos->map(function(Video $video){
                 $res = [];
                 $res['id']          = $video->getId();

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Video;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,9 +13,12 @@ class VideoController extends AbstractController
      */
     public function index()
     {
+
+        $video_repo = $this->getDoctrine()->getRepository(Video::class);
+
         return $this->json([
-            'message' => "VideoController",
-            'path' => "src/Controller/VideoController.php"
+            "method" => "index",
+            "videos" => $video_repo->findAll(),
         ]);
     }
 }
