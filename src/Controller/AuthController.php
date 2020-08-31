@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\UserRegister;
+use App\Service\JwtAuth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\Exception\JsonException;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -29,17 +32,12 @@ class AuthController extends AbstractController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @return \Symfony\Component\HttpFoundation\JsonResponse
-     * @throws \Symfony\Component\HttpClient\Exception\JsonException
      */
     public function register(Request $request, ValidatorInterface $validator)
     {
         $requestObj = $request->request;
 
-        $new_user = new User();
-        $new_user->setName($requestObj->get('name', ""));
-        $new_user->setSurname($requestObj->get('surname', ""));
-        $new_user->setPassword(hash('sha256', $requestObj->get('password', "")));
-        $new_user->setEmail($requestObj->get('email', ""));
+        $new_user = $this->getUserFromRequest($requestObj, true);
 
         $errors = $validator->validate($new_user);
         if ($errors->count() > 0) {
@@ -49,6 +47,9 @@ class AuthController extends AbstractController
                 "status" => -1,
             ], 400);
         }
+
+        //Ya con los datos validados, podemos cifrar la contraseña para pasarla luego a la BD
+        $new_user->setPassword(hash('sha256', $new_user->getPassword()));
 
         //Antes de guardar el usuario, tenemos que comprobar que no se está realizando una creación con un correo o
         // datos que ya existen en la BD. Para ello tenemos que acceder al manager de Doctrine, el encargado de dejarnos
@@ -86,10 +87,86 @@ class AuthController extends AbstractController
             $entity_manager->flush();
 
             return $this->json([
-                "method" => "register",
-                "message" => ["successful"],
+                "code" => "200",
+                "status" => 1,
                 "user" => $new_user,
             ], 200);
         }
+    }
+
+    /**
+     * @Route("/auth/login", methods={"POST"}, name="login")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function login(Request $request, ValidatorInterface $validator, JwtAuth $auth)
+    {
+
+        $requestObj = $request->request;
+        $user_to_login = $this->getUserFromRequest($requestObj, false);
+        $retrieve_token = $requestObj->get("get_token", "");
+        if (! isset($user_to_login)) {
+            return $this->json([
+                "code" => 400,
+                "errors" => "Error logueando un usuario",
+                "status" => -1,
+            ], 400);
+        }
+
+        $errors = $validator->validate($user_to_login);
+        if ($errors->count() > 0) {
+            return $this->json([
+                "code" => 400,
+                "errors" => $errors,
+                "status" => -1,
+            ], 400);
+        }
+
+        //Si se ha validado, ciframos la contraseña para poder buscar luego la tupla (email,password) en la BD
+        $user_to_login->setPassword(hash('sha256', $user_to_login->getPassword()));
+
+        $login_attempt = $auth->signup($user_to_login, $retrieve_token);
+        if (count($login_attempt) <= 0) {
+            return $this->generateJsonErrorResponse(400, ["Username or password incorrect."]);
+        }
+
+        return $this->json([
+            "method" => "login",
+            "message" => $login_attempt,
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\InputBag $requestObj
+     * @param bool $is_register
+     * @return null|User
+     */
+    private function getUserFromRequest(InputBag $requestObj, bool $is_register)
+    {
+        if (count($requestObj) <= 0) {
+            return null;
+        }
+        $user_in_request = new User();
+        $user_in_request->setName($requestObj->get('name', ""));
+        $user_in_request->setSurname($requestObj->get('surname', ""));
+        $user_in_request->setPassword($requestObj->get('password', ""));
+        $user_in_request->setEmail($requestObj->get('email', ""));
+
+        return $user_in_request;
+    }
+
+    /**
+     * @param int $error_code
+     * @param array $errors
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    private function generateJsonErrorResponse(int $error_code, array $errors)
+    {
+        return $this->json([
+            "code" => $error_code,
+            "errors" => $errors,
+            "status" => -1,
+        ], $error_code);
     }
 }

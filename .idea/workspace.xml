@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb6a33e-69ea-407f-a221-6b03c183eb30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/UserRegister.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRegisterRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/auth/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/JwtAuth.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VideoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +19,11 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Carlos Martel Lamas &lt;carlos.martellamas@outlook.es&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -176,21 +175,45 @@
       <workItem from="1596708010486" duration="1690000" />
       <workItem from="1596801260022" duration="3507000" />
       <workItem from="1598860565746" duration="404000" />
-      <workItem from="1598863479884" duration="5973000" />
+      <workItem from="1598863479884" duration="11950000" />
     </task>
+    <task id="LOCAL-00001" summary="Llegamos hasta la sección 69. Empezamos con el login de los usuarios.">
+      <created>1598870926695</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598870926695</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Llegamos hasta la sección 69. Empezamos con el login de los usuarios." />
+    <option name="LAST_COMMIT_MESSAGE" value="Llegamos hasta la sección 69. Empezamos con el login de los usuarios." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598872978859">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598872978859" />
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2" timestamp="1598870925959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598870925959" />
     <state x="723" y="430" key="ComposerInitDialogKey" timestamp="1596623170265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="723" y="430" key="ComposerInitDialogKey/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596623170265" />
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1598874317275">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="439" key="NewPhpFileDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598874317275" />
     <state x="636" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1598863497529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
