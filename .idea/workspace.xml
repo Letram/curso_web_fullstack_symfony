@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb6a33e-69ea-407f-a221-6b03c183eb30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/validation/edit_user_validation.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/JwtAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/JwtAuth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VideoController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +185,7 @@
       <workItem from="1596801260022" duration="3507000" />
       <workItem from="1598860565746" duration="404000" />
       <workItem from="1598863479884" duration="12049000" />
-      <workItem from="1598948666531" duration="12277000" />
+      <workItem from="1598948666531" duration="13961000" />
     </task>
     <task id="LOCAL-00001" summary="Llegamos hasta la sección 69. Empezamos con el login de los usuarios.">
       <created>1598870926695</created>
@@ -206,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598878420007</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Terminada la sección 71, empezamos la 72">
+      <created>1598963380045</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1598963380045</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +219,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Llegamos hasta la sección 69. Empezamos con el login de los usuarios." />
     <MESSAGE value="Empezada la sección 70 - 271" />
-    <option name="LAST_COMMIT_MESSAGE" value="Empezada la sección 70 - 271" />
+    <MESSAGE value="Terminada la sección 71, empezamos la 72" />
+    <option name="LAST_COMMIT_MESSAGE" value="Terminada la sección 71, empezamos la 72" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -225,10 +228,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598950612652" />
-    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2" timestamp="1598878419509">
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2" timestamp="1598963379459">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598878419509" />
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598963379459" />
     <state x="723" y="430" key="ComposerInitDialogKey" timestamp="1596623170265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

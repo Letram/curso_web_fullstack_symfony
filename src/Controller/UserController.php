@@ -46,12 +46,12 @@ class UserController extends AbstractController
     {
         $auth_token = $request->headers->get("Authorization");
 
-        $params = $request->request->all();
-        unset($params["retrieve_token"]);
-
         if (! isset($auth_token)) {
             return $this->generateJsonErrorResponse(403, ["Token not valid"]);
         }
+
+        $params = $request->request->all();
+        unset($params["retrieve_token"]);
 
         $decoded_token = $auth->isTokenValid($auth_token);
         if (! isset($decoded_token)) {
