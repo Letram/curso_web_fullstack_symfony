@@ -1,0 +1,13 @@
+App\Entity\User:
+  properties:
+    name:
+      - Length:
+          min: 2
+          allowEmptyString: true
+    surname:
+      - Length:
+          min: 2
+          allowEmptyString: true
+    email:
+      - Email:
+          message: The email "{{ value }}" is not a valid email.

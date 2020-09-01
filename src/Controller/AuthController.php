@@ -98,6 +98,7 @@ class AuthController extends AbstractController
      * @Route("/auth/login", methods={"POST"}, name="login")
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
+     * @param \App\Service\JwtAuth $auth
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function login(Request $request, ValidatorInterface $validator, JwtAuth $auth)
@@ -105,7 +106,7 @@ class AuthController extends AbstractController
 
         $requestObj = $request->request;
         $user_to_login = $this->getUserFromRequest($requestObj, false);
-        $retrieve_token = $requestObj->get("get_token", "");
+        $retrieve_token = $requestObj->get("retrieve_token", "");
         if (! isset($user_to_login)) {
             return $this->json([
                 "code" => 400,
