@@ -13,66 +13,79 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * User
+ *
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements JsonSerializable
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=63)
+     * @var string
      *
-     * @Assert\NotBlank
+     * @ORM\Column(name="name", type="string", length=63, nullable=false)
+     *
      * @Assert\Length(min=2)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=127)
-     * @Assert\NotBlank
-     * @Assert\Length(min=2)
+     * @var string
+     *
+     * @ORM\Column(name="surname", type="string", length=127, nullable=false)
      */
     private $surname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     *
      * @Assert\Email
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     *
      * @Assert\Length(min=2)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50, options={"default": "ROLE_GUEST"})
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=50, nullable=false, options={"default"="ROLE_GUEST"})
      */
-    private $role;
+    private $role = 'ROLE_GUEST';
 
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="user")
      */
     private $videos;
 
     public function __construct()
     {
         $this->videos = new ArrayCollection();
-        $this->role = "ROLE_GUEST";
-        $this->created_at = new DateTime('now');
+        $this->createdAt = new DateTime("now");
     }
 
     public function getId(): ?int
@@ -142,12 +155,12 @@ class User implements JsonSerializable
 
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -162,9 +175,9 @@ class User implements JsonSerializable
 
     public function addVideo(Video $video): self
     {
-        if (!$this->videos->contains($video)) {
+        if (! $this->videos->contains($video)) {
             $this->videos[] = $video;
-            $video->setUserId($this);
+            $video->setUser($this);
         }
 
         return $this;
@@ -175,8 +188,8 @@ class User implements JsonSerializable
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getUserId() === $this) {
-                $video->setUserId(null);
+            if ($video->getUser() === $this) {
+                $video->setUser(null);
             }
         }
 
@@ -189,28 +202,26 @@ class User implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'         => $this->id,
-            'name'       => $this->name,
-            'surname'    => $this->surname,
-            'email'      => $this->email,
-            'role'       => $this->role,
-            'created_at' => $this->created_at,
+            'id' => $this->id,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'email' => $this->email,
+            'role' => $this->role,
+            'created_at' => $this->createdAt,
             //'password'   => $this->password,
-            'videos'     => $this->videos->map(function(Video $video){
+            'videos' => $this->videos->map(function (Video $video) {
                 $res = [];
-                $res['id']          = $video->getId();
-                $res['title']       = $video->getTitle();
+                $res['id'] = $video->getId();
+                $res['title'] = $video->getTitle();
                 $res['description'] = $video->getDescription();
-                $res['url']         = $video->getUrl();
-                $res['status']      = $video->getStatus();
-                $res['created_at']  = $video->getCreatedAt();
-                $res['updated_at']  = $video->getUpdatedAt();
-                $res['user_id']     = $video->getUser()->getId();
+                $res['url'] = $video->getUrl();
+                $res['status'] = $video->getStatus();
+                $res['created_at'] = $video->getCreatedAt();
+                $res['updated_at'] = $video->getUpdatedAt();
+                $res['user_id'] = $video->getUser()->getId();
 
                 return $res;
-            })
+            }),
         ];
     }
-
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Container7n28FQI\getDebug_Security_UserValueResolverService;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Firebase\JWT\JWT;
@@ -30,6 +31,7 @@ class JwtAuth
             "email" => $user_to_login->getEmail(),
             "password" => $user_to_login->getPassword(),
         ]);
+
         if (isset($user)) {
             $token = [];
             $token["user"] = $user;

@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb6a33e-69ea-407f-a221-6b03c183eb30" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/config/packages/knp_paginator.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/validation/login_validation.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VideoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/UserRegister.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Video.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRegisterRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/JwtAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/JwtAuth.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +194,8 @@
       <workItem from="1596801260022" duration="3507000" />
       <workItem from="1598860565746" duration="404000" />
       <workItem from="1598863479884" duration="12049000" />
-      <workItem from="1598948666531" duration="13961000" />
+      <workItem from="1598948666531" duration="14113000" />
+      <workItem from="1599033422284" duration="11609000" />
     </task>
     <task id="LOCAL-00001" summary="Llegamos hasta la sección 69. Empezamos con el login de los usuarios.">
       <created>1598870926695</created>
@@ -208,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598963380045</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Casi terminada la sección 72. Me falta guardar el vídeo y enlazarlo con el usuario">
+      <created>1598964948042</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598964948042</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,7 +237,8 @@
     <MESSAGE value="Llegamos hasta la sección 69. Empezamos con el login de los usuarios." />
     <MESSAGE value="Empezada la sección 70 - 271" />
     <MESSAGE value="Terminada la sección 71, empezamos la 72" />
-    <option name="LAST_COMMIT_MESSAGE" value="Terminada la sección 71, empezamos la 72" />
+    <MESSAGE value="Casi terminada la sección 72. Me falta guardar el vídeo y enlazarlo con el usuario" />
+    <option name="LAST_COMMIT_MESSAGE" value="Casi terminada la sección 72. Me falta guardar el vídeo y enlazarlo con el usuario" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -228,25 +246,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598950612652" />
-    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2" timestamp="1598963379459">
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2" timestamp="1598964947520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598963379459" />
+    <state x="583" y="22" width="1013" height="995" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598964947520" />
     <state x="723" y="430" key="ComposerInitDialogKey" timestamp="1596623170265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="723" y="430" key="ComposerInitDialogKey/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596623170265" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1599036158915">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599036158915" />
     <state x="794" y="439" key="NewPhpFileDialog" timestamp="1598874317275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="439" key="NewPhpFileDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598874317275" />
-    <state x="552" y="248" key="Vcs.Push.Dialog.v2" timestamp="1598878429385">
+    <state x="552" y="248" key="Vcs.Push.Dialog.v2" timestamp="1598964956188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="248" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598878429385" />
-    <state x="636" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1598948673411">
+    <state x="552" y="248" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598964956188" />
+    <state x="636" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1599033448248">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1598948673411" />
+    <state x="636" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599033448248" />
   </component>
 </project>

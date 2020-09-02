@@ -6,11 +6,13 @@ use App\Entity\User;
 use App\Entity\UserRegister;
 use App\Service\JwtAuth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\HttpClient\Exception\JsonException;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\HttpClient\Exception;
@@ -101,7 +103,7 @@ class AuthController extends AbstractController
      * @param \App\Service\JwtAuth $auth
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function login(Request $request, ValidatorInterface $validator, JwtAuth $auth)
+    public function login(Request $request, JwtAuth $auth)
     {
 
         $requestObj = $request->request;
@@ -115,6 +117,8 @@ class AuthController extends AbstractController
             ], 400);
         }
 
+        $projectRoot = $this->getParameter('kernel.project_dir');
+        $validator = Validation::createValidatorBuilder()->addYamlMapping($projectRoot."/config/validation/login_validation.yaml")->getValidator();
         $errors = $validator->validate($user_to_login);
         if ($errors->count() > 0) {
             return $this->json([
