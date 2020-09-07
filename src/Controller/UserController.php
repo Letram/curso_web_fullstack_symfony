@@ -63,7 +63,7 @@ class UserController extends AbstractController
         $entity_manager = $this->getDoctrine()->getManager();
         $user_repository = $this->getDoctrine()->getRepository(User::class);
 
-        $current_user = (object) $user_repository->findOneBy(["id" => $decoded_token->user->id]);
+        $current_user = $user_repository->findOneBy(["id" => $decoded_token->user->id]);
 
         $request_user_data = $this->getUserFromRequest($request->request, false);
 

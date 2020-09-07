@@ -1,0 +1,12 @@
+App\Entity\Video:
+  properties:
+    title:
+      - Length:
+          min: 5
+          allowEmptyString: true
+    description:
+      - Length:
+          min: 10
+          allowEmptyString: true
+    url:
+      - Url: ~

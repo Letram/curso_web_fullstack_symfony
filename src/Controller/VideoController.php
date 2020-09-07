@@ -11,27 +11,15 @@ use Container7n28FQI\getSecurity_Firewall_Map_Context_DevService;
 use Doctrine\ORM\Query\Expr\Math;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class VideoController extends AbstractController
 {
-    /**
-     * @Route("/video", name="video")
-     */
-    public function index()
-    {
-
-        $video_repo = $this->getDoctrine()->getRepository(Video::class);
-
-        return $this->json([
-            "method" => "index",
-            "videos" => $video_repo->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/video/create", methods={"POST"}, name="video.create")
      *
@@ -42,26 +30,13 @@ class VideoController extends AbstractController
      */
     public function create(Request $request, ValidatorInterface $validator, JwtAuth $auth)
     {
-        $auth_token = $request->headers->get("Authorization");
-
-        if (! isset($auth_token)) {
-            return $this->generateJsonErrorResponse(400, ["Auth token missing"]);
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        if ($loginAttempt instanceof JsonResponse) {
+            return $loginAttempt;
         }
+        $current_user = $loginAttempt;
 
-        $decoded_token = $auth->isTokenValid($auth_token);
-
-        if (! isset($decoded_token)) {
-            return $this->generateJsonErrorResponse(400, ["Auth token not valid"]);
-        }
-
-        $user_repository = $this->getDoctrine()->getRepository(User::class);
         $entity_manager = $this->getDoctrine()->getManager();
-
-        $current_user = $user_repository->find($decoded_token->user->id);
-
-        if (! isset($current_user)) {
-            return $this->generateJsonErrorResponse(400, ["Problem retrieving current user"]);
-        }
 
         $params = $request->request->all();
 
@@ -126,33 +101,21 @@ class VideoController extends AbstractController
      * @Route("/videos", methods={"GET"}, name="video.videos")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Knp\Component\Pager\PaginatorInterface $pager
      * @param \App\Service\JwtAuth $auth
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getVideosPaginated(Request $request, PaginatorInterface $pager, JwtAuth $auth)
     {
-        $auth_token = $request->headers->get("Authorization");
-
-        if (! isset($auth_token)) {
-            return $this->generateJsonErrorResponse(400, ["Auth token missing"]);
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        if ($loginAttempt instanceof JsonResponse) {
+            return $loginAttempt;
         }
+        $current_user = $loginAttempt;
 
-        $decoded_token = $auth->isTokenValid($auth_token);
-
-        if (! isset($decoded_token)) {
-            return $this->generateJsonErrorResponse(400, ["Auth token not valid"]);
-        }
-
-        $user_repository = $this->getDoctrine()->getRepository(User::class);
         $entity_manager = $this->getDoctrine()->getManager();
 
-        $current_user = $user_repository->find($decoded_token->user->id);
-
-        if (! isset($current_user)) {
-            return $this->generateJsonErrorResponse(400, ["Problem retrieving current user"]);
-        }
-
-        //empezamos con  la paginación de los videos. Hay que recordar que el paginador usa sentencias en DQL
+        //Empezamos con  la paginación de los videos. Hay que recordar que el paginador usa sentencias en DQL. Tenemos simplemente que recoger los videos del usuario registrado
         $dql_query = "SELECT v FROM App\Entity\Video v WHERE v.user = {$current_user->getId()} ORDER BY v.id DESC";
         $query = $entity_manager->createQuery($dql_query);
 
@@ -173,6 +136,154 @@ class VideoController extends AbstractController
             "videos" => $pagination,
             "user_id" => $current_user->getId(),
         ], 200);
+    }
+
+    /**
+     * @Route("/videos/{id}", methods={"GET"}, name="video.video")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Service\JwtAuth $auth
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getVideoInfo(Request $request, JwtAuth $auth, $id)
+    {
+
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        if ($loginAttempt instanceof JsonResponse) {
+            return $loginAttempt;
+        }
+        $current_user = $loginAttempt;
+
+        $video_repository = $this->getDoctrine()->getRepository(Video::class);
+
+        $video = $video_repository->findOneBy(["id" => $id, "user" => $current_user->getId()]);
+
+        if (! isset($video)) {
+            return $this->generateJsonErrorResponse(404, ["Video not found in favourites"]);
+        }
+
+        return $this->json([
+            "status" => 1,
+            "code" => 200,
+            "video" => $video,
+        ]);
+    }
+
+    /**
+     * @Route("/videos/{id}", methods={"DELETE"}, name="video.remove")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Service\JwtAuth $auth
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function removeVideo(Request $request, JwtAuth $auth, $id)
+    {
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        if ($loginAttempt instanceof JsonResponse) {
+            return $loginAttempt;
+        }
+        $current_user = $loginAttempt;
+
+        $video_repository = $this->getDoctrine()->getRepository(Video::class);
+
+        $video = $video_repository->findOneBy(["id" => $id, "user" => $current_user->getId()]);
+
+        if (! isset($video)) {
+            return $this->generateJsonErrorResponse(404, ["Video not found in favourites"]);
+        }
+
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->remove($video);
+        $entity_manager->flush();
+
+        return $this->json([
+            "status" => 1,
+            "code" => 200,
+            "video" => $video,
+        ]);
+    }
+
+    /**
+     * @Route("/videos/{id}", methods={"PUT", "UPDATE"}, name="video.update")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Service\JwtAuth $auth
+     * @param $id
+     * @return object|\Symfony\Component\HttpFoundation\JsonResponse|null
+     */
+    public function updateVideo(Request $request, JwtAuth $auth, $id)
+    {
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        if ($loginAttempt instanceof JsonResponse) {
+            return $loginAttempt;
+        }
+        $current_user = $loginAttempt;
+
+        $video_repository = $this->getDoctrine()->getRepository(Video::class);
+
+        $video = $video_repository->findOneBy(["id" => $id, "user" => $current_user->getId()]);
+
+        if (! isset($video)) {
+            return $this->generateJsonErrorResponse(404, ["Video not found in favourites"]);
+        }
+
+        $validator = Validation::createValidator();
+        $params = $request->request->all();
+        $constraints = new Assert\Collection([
+            "title"       => new Assert\Optional(new Assert\Length(["min" => 5])),
+            "description" => new Assert\Optional(new Assert\Length(["min" => 10])),
+            "url"         => new Assert\Optional(new Assert\Url()),
+        ]);
+        $errors = $validator->validate($params, $constraints);
+
+        if ($errors->count() > 0) {
+            return $this->generateJsonErrorResponse(400, (array) $errors);
+        }
+
+        //Recorremos todos los parámetros que queremos cambiar que están en la request y llamamos al setter de cada uno
+        foreach ($params as $key => $value) {
+            call_user_func_array([$video, 'set'.ucfirst($key)], [$value]);
+        }
+
+        $entity_manager = $this->getDoctrine()->getManager();
+
+        $entity_manager->flush();
+
+        return $this->json([
+            "status" => 1,
+            "code"   => 200,
+            "video"  => $video,
+        ]);
+    }
+
+    /**
+     * @param string $auth_token
+     * @param \App\Service\JwtAuth $auth
+     * @return object|\Symfony\Component\HttpFoundation\JsonResponse|null
+     */
+    private function getLoggedUser(string $auth_token, JwtAuth $auth)
+    {
+        if (! isset($auth_token)) {
+            return $this->generateJsonErrorResponse(400, ["Auth token missing"]);
+        }
+
+        $decoded_token = $auth->isTokenValid($auth_token);
+
+        if (! isset($decoded_token)) {
+            return $this->generateJsonErrorResponse(400, ["Auth token not valid"]);
+        }
+
+        $user_repository = $this->getDoctrine()->getRepository(User::class);
+
+        $current_user = $user_repository->find($decoded_token->user->id);
+
+        if (! isset($current_user)) {
+            return $this->generateJsonErrorResponse(400, ["Problem retrieving current user"]);
+        }
+
+        return $current_user;
     }
 
     /**
