@@ -1,0 +1,28 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form {
+      width: 40%;
+      height: auto;
+      border: 1px solid #673ab7;
+      border-top-right-radius: 1rem;
+      border-top-left-radius: 1rem;
+      overflow: hidden;
+      .form_title {
+        padding: 1.5rem 0.5rem 1rem;
+        color: white;
+      }
+      .form_param {
+        display: block;
+        margin: 0.25rem;
+      }
+      button {
+        display: block;
+        margin: 0 auto 0.5rem;
+      }
+    }
+  }
+  
