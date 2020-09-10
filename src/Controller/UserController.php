@@ -8,6 +8,7 @@ use App\Service\JwtAuth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -96,11 +97,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\InputBag $requestObj
+     * @param \Symfony\Component\HttpFoundation\ParameterBag $requestObj
      * @param bool $is_register
      * @return null|User
      */
-    private function getUserFromRequest(InputBag $requestObj, bool $is_register)
+    private function getUserFromRequest(ParameterBag $requestObj, bool $is_register)
     {
         if (count($requestObj) <= 0) {
             return null;

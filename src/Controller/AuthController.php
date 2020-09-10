@@ -37,9 +37,10 @@ class AuthController extends AbstractController
      */
     public function register(Request $request, ValidatorInterface $validator)
     {
-        $requestObj = $request->request;
+        //https://silex.symfony.com/doc/2.0/cookbook/json_request_body.html
+        $request = $this->processRequest($request);
 
-        $new_user = $this->getUserFromRequest($requestObj, true);
+        $new_user = $this->getUserFromRequest($request);
 
         $errors = $validator->validate($new_user);
         if ($errors->count() > 0) {
@@ -99,15 +100,16 @@ class AuthController extends AbstractController
     /**
      * @Route("/auth/login", methods={"POST"}, name="login")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \App\Service\JwtAuth $auth
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function login(Request $request, JwtAuth $auth)
     {
+        //https://silex.symfony.com/doc/2.0/cookbook/json_request_body.html
+        $request = $this->processRequest($request);
 
         $requestObj = $request->request;
-        $user_to_login = $this->getUserFromRequest($requestObj, false);
+        $user_to_login = $this->getUserFromRequest($request);
         $retrieve_token = $requestObj->get("retrieve_token", "");
         if (! isset($user_to_login)) {
             return $this->json([
@@ -142,21 +144,24 @@ class AuthController extends AbstractController
         ]);
     }
 
+    private function processRequest(Request $request){
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+        return $request;
+    }
     /**
-     * @param \Symfony\Component\HttpFoundation\InputBag $requestObj
-     * @param bool $is_register
+     * @param \Symfony\Component\HttpFoundation\Request $requestObj
      * @return null|User
      */
-    private function getUserFromRequest(InputBag $requestObj, bool $is_register)
+    private function getUserFromRequest(Request $requestObj)
     {
-        if (count($requestObj) <= 0) {
-            return null;
-        }
         $user_in_request = new User();
-        $user_in_request->setName($requestObj->get('name', ""));
-        $user_in_request->setSurname($requestObj->get('surname', ""));
-        $user_in_request->setPassword($requestObj->get('password', ""));
-        $user_in_request->setEmail($requestObj->get('email', ""));
+        $user_in_request->setName($requestObj->request->get('name', ""));
+        $user_in_request->setSurname($requestObj->request->get('surname', ""));
+        $user_in_request->setPassword($requestObj->request->get('password', ""));
+        $user_in_request->setEmail($requestObj->request->get('email', ""));
 
         return $user_in_request;
     }

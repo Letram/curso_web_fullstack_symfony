@@ -1,49 +1,52 @@
 <div class="container">
-  <form class="form" #loginForm="ngForm" (ngSubmit)="onLoginSubmit()">
-    <div class="mat-typography form_title color_primary">
-      <h1>Login</h1>
-    </div>
-    <mat-form-field class="form_param">
-      <mat-label>Email*</mat-label>
-      <input
-        matInput
-        type="text"
-        name="email"
-        [errorStateMatcher]="loginErrorMatcher"
-        [formControl]="emailFormControl"
-      />
-      <mat-error
-        *ngIf="
-          emailFormControl.hasError('email') &&
-          !emailFormControl.hasError('required')
-        "
+  <div class="form_container">
+    <form class="form" #loginForm="ngForm" (ngSubmit)="onLoginSubmit()">
+      <div class="mat-typography form_title color_primary">
+        <h1>Login</h1>
+      </div>
+      <mat-form-field class="form_param">
+        <mat-label>Email*</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          [errorStateMatcher]="loginErrorMatcher"
+          [formControl]="emailFormControl"
+        />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form_param">
+        <mat-label>Contraseña*</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [errorStateMatcher]="loginErrorMatcher"
+          [formControl]="passwordFormControl"
+        />
+        <mat-error *ngIf="passwordFormControl.hasError('required')"
+          >Password is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)"
       >
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="form_param">
-      <mat-label>Contraseña*</mat-label>
-      <input
-        matInput
-        type="password"
-        name="password"
-        [errorStateMatcher]="loginErrorMatcher"
-        [formControl]="passwordFormControl"
-      />
-      <mat-error *ngIf="passwordFormControl.hasError('required')"
-        >Password is <strong>required</strong></mat-error
-      >
-    </mat-form-field>
-    <button
-      type="submit"
-      mat-raised-button
-      color="accent"
-      [disabled]="!(emailFormControl.valid && passwordFormControl.valid)"
-    >
-      Login!
-    </button>
-  </form>
+        Login!
+      </button>
+    </form>
+    <p>¿No tienes una cuenta? <a routerLink="/register">¡Regístrate!</a></p>
+  </div>
 </div>

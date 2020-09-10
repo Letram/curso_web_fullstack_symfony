@@ -1,4 +1,5 @@
 <div class="container">
+  <div class="form_container">
     <form class="form" #registerForm="ngForm" (ngSubmit)="onRegisterSubmit()">
       <div class="mat-typography form_title color_primary">
         <h1>Register</h1>
@@ -17,17 +18,14 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form_param">
-        <mat-label>Apellidos*</mat-label>
+        <mat-label>Apellidos</mat-label>
         <input
           matInput
           type="text"
           name="surname"
+          [(ngModel)]="surname"
           [errorStateMatcher]="registerErrorFormMatcher"
-          [formControl]="surnameFormControl"
         />
-        <mat-error *ngIf="surnameFormControl.hasError('required')">
-          Surname is <strong>required</strong>
-        </mat-error>
       </mat-form-field>
       <mat-form-field class="form_param">
         <mat-label>Email*</mat-label>
@@ -67,10 +65,17 @@
         type="submit"
         mat-raised-button
         color="accent"
-        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)"
+        [disabled]="
+          !(
+            emailFormControl.valid &&
+            passwordFormControl.valid &&
+            nameFormControl.valid
+          )
+        "
       >
         Register!
       </button>
     </form>
+    <p>¿Ya tienes una cuenta? <a routerLink="/login">¡Identifícate!</a></p>
   </div>
-  
+</div>
