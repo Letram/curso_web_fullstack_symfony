@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Añadir video favorito</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="data.title" name="title" type="text" [errorStateMatcher]="addVideoErrorMatcher"
+    [formControl]="titleFormControl" />
+  </mat-form-field>
+  <mat-error *ngIf="titleFormControl.hasError('required')">
+    Title is <strong>required</strong>
+  </mat-error>
+  <mat-error *ngIf="titleFormControl.hasError('minLength')">
+    Title has to be at least <strong>5 characters long</strong>
+  </mat-error>
+  <mat-form-field>
+    <mat-label>URL</mat-label>
+    <input matInput [(ngModel)]="data.url" name="url" type="text" [errorStateMatcher]="addVideoErrorMatcher"
+    [formControl]="urlFormControl" />
+  </mat-form-field>
+  <mat-error *ngIf="urlFormControl.hasError('required')">
+    Url is <strong>required</strong>
+  </mat-error>
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="data.description" rows="5"> </textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="!(titleFormControl.valid && urlFormControl.valid)">
+    Ok
+  </button>
+</div>

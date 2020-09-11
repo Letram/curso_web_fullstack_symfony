@@ -40,6 +40,10 @@ export class AuthService {
     return parsed_data.exp >= new Date().getTime()/1000;
   }
 
+  public getToken(): string{
+    return localStorage.getItem("token");
+  }
+
   public logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("decoded_token");

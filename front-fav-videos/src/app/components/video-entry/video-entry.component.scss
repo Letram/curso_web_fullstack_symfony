@@ -1,0 +1,16 @@
+mat-card {
+  margin: 0.25rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .card-content {
+    width: fit-content;
+  }
+  .details_btn{
+      width: 2rem;
+      height: 2rem;
+      mat-icon{
+          font-size: 2rem;
+      }
+  }
+}

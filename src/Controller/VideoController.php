@@ -30,7 +30,8 @@ class VideoController extends AbstractController
      */
     public function create(Request $request, ValidatorInterface $validator, JwtAuth $auth)
     {
-        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
+        $request = $this->processRequest($request);
+        $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization", ""), $auth);
         if ($loginAttempt instanceof JsonResponse) {
             return $loginAttempt;
         }
@@ -107,6 +108,7 @@ class VideoController extends AbstractController
      */
     public function getVideosPaginated(Request $request, PaginatorInterface $pager, JwtAuth $auth)
     {
+        $request = $this->processRequest($request);
         $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
         if ($loginAttempt instanceof JsonResponse) {
             return $loginAttempt;
@@ -148,7 +150,8 @@ class VideoController extends AbstractController
      */
     public function getVideoInfo(Request $request, JwtAuth $auth, $id)
     {
-
+        $request = $this->processRequest($request);
+        return $this->json($request->headers->all());
         $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
         if ($loginAttempt instanceof JsonResponse) {
             return $loginAttempt;
@@ -180,6 +183,7 @@ class VideoController extends AbstractController
      */
     public function removeVideo(Request $request, JwtAuth $auth, $id)
     {
+        $request = $this->processRequest($request);
         $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
         if ($loginAttempt instanceof JsonResponse) {
             return $loginAttempt;
@@ -215,6 +219,8 @@ class VideoController extends AbstractController
      */
     public function updateVideo(Request $request, JwtAuth $auth, $id)
     {
+        $request = $this->processRequest($request);
+
         $loginAttempt = $this->getLoggedUser($request->headers->get("Authorization"), $auth);
         if ($loginAttempt instanceof JsonResponse) {
             return $loginAttempt;
@@ -311,8 +317,14 @@ class VideoController extends AbstractController
             if ($compare->getUrl() == $entry->getUrl()) {
                 return true;
             }
-
-            return false;
         }
+        return false;
+    }
+    private function processRequest(Request $request){
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+        return $request;
     }
 }

@@ -1,3 +1,4 @@
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'profile', component: EditUserComponent },
   { path: '**', component: ErrorComponent },
 ];
 

@@ -1,0 +1,19 @@
+<mat-toolbar class="navbar" color="primary">
+  <mat-toolbar-row>
+    <span>Marcador de vídeos favoritos</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="color_accent">
+      <div class="links">
+        <span>
+            <a routerLink="/home">Mis videos</a>
+        </span>
+        <span>
+            <a routerLink="/profile">Perfil</a>
+        </span>
+      </div>
+      <span class="spacer"></span>
+      <button mat-icon-button color="primary" aria-label="add video icon" (click)="openDialog()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+  </mat-toolbar-row>
+</mat-toolbar>

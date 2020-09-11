@@ -1,1 +1,8 @@
-<p>home works!</p>
+<app-navbar (onVideoAdded)="onVideoAdded($event)"></app-navbar>
+<div class="video-container">
+  <span *ngIf="userVideos.length <= 0 && loading == false">No hay vídeos disponibles...</span>
+  <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+  <div class="video-list">
+      <app-video-entry *ngFor="let video of userVideos" [video]="video"></app-video-entry>
+  </div>
+</div>

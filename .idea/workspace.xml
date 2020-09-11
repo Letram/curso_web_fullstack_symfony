@@ -2,24 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb6a33e-69ea-407f-a221-6b03c183eb30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/interfaces/ServerError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/models/user.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/models/video.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/services/auth.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/services/auth.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/add-video-dialog/add-video-dialog.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/add-video-dialog/add-video-dialog.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/add-video-dialog/add-video-dialog.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/add-video-dialog/add-video-dialog.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/navbar/navbar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/navbar/navbar.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/navbar/navbar.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/navbar/navbar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/video-entry/video-entry.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/video-entry/video-entry.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/video-entry/video-entry.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/components/video-entry/video-entry.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/interfaces/CreateVideoInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/edit-user/edit-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/edit-user/edit-user.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/edit-user/edit-user.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/edit-user/edit-user.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/services/video.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-fav-videos/src/app/services/video.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/pages/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-fav-videos/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-fav-videos/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VideoController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +214,8 @@
       <workItem from="1599033422284" duration="11688000" />
       <workItem from="1599049895950" duration="36000" />
       <workItem from="1599464190736" duration="7346000" />
-      <workItem from="1599724777050" duration="4118000" />
+      <workItem from="1599724777050" duration="4673000" />
+      <workItem from="1599821053412" duration="1411000" />
     </task>
     <task id="LOCAL-00001" summary="Llegamos hasta la sección 69. Empezamos con el login de los usuarios.">
       <created>1598870926695</created>
@@ -288,9 +298,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="248" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599049799243" />
-    <state x="636" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1599724782573">
+    <state x="636" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1599821078607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599724782573" />
+    <state x="636" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599821078607" />
   </component>
 </project>

@@ -20,6 +20,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AddVideoDialogComponent } from './components/add-video-dialog/add-video-dialog.component';
+import { VideoEntryComponent } from './components/video-entry/video-entry.component';
+import { VideoEntryDialogComponent } from './components/video-entry-dialog/video-entry-dialog.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +32,11 @@ import { HomeComponent } from './pages/home/home.component';
     ErrorComponent,
     RegisterComponent,
     HomeComponent,
+    EditUserComponent,
+    NavbarComponent,
+    AddVideoDialogComponent,
+    VideoEntryComponent,
+    VideoEntryDialogComponent,
   ],
   imports: [
     BrowserModule,
