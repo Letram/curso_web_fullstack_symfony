@@ -1,4 +1,4 @@
-import { User } from './../../../.history/src/app/models/user_20200910091430';
+import { User } from '../models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  
   constructor(private _http: HttpClient) {}
 
   private _loggedUser: User = null;
@@ -42,6 +43,12 @@ export class AuthService {
 
   public getToken(): string{
     return localStorage.getItem("token");
+  }
+
+  public getUser(): User {
+    if(!this.isLoggedIn())return null;
+    let decoded_data = JSON.parse(localStorage.getItem('decoded_token'));
+    return decoded_data.user;
   }
 
   public logout(){
