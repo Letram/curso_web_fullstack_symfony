@@ -1,3 +1,4 @@
+import { Video } from './../models/video';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -18,8 +19,20 @@ export class VideoService {
       headers: headers,
     });
   }
-  getVideos(token: string): Observable<any> {
+  getVideos(token: string, page: number = 1): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', token);
-    return this._http.get(`${environment.url}/videos`, { headers: headers });
+    return this._http.get(`${environment.url}/videos?page=${page}`, {
+      headers: headers,
+    });
+  }
+  updateVideo(token: string, updatedVideo: {id: number, params: any}) {
+    let headers = new HttpHeaders()
+      .set('authorization', token)
+      .set('content-type', 'application/json');
+    return this._http.put(
+      `${environment.url}/videos/${updatedVideo.id}`,
+      {...updatedVideo.params},
+      { headers }
+    );
   }
 }

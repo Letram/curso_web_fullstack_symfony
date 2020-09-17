@@ -1,0 +1,17 @@
+.header{
+    h1{
+        text-align: center;
+        border-bottom: 2px solid #673ab7;
+    }
+}
+.edit-form{
+    mat-form-field{
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+    }
+    button{
+        display: block;
+        margin: 0 auto;
+    }
+}

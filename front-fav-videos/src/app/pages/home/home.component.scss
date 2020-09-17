@@ -1,0 +1,13 @@
+.buttons{
+    height: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    button{
+        height: 3rem;
+        width: 3rem;
+        mat-icon{
+            font-size: 3rem;
+        }
+    }
+}

@@ -1,1 +1,57 @@
-<p>video-entry-dialog works!</p>
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content class="mat-dialog-content">
+
+  <iframe
+    [src]="getVideoIframe(data.url)"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+
+  <div class="video-info">
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.title"
+        name="title"
+        type="text"
+        [errorStateMatcher]="videoEntryErrorMatcher"
+        [formControl]="titleFormControl"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="titleFormControl.hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="titleFormControl.hasError('minLength')">
+      Title has to be at least <strong>5 characters long</strong>
+    </mat-error>
+    <mat-form-field>
+      <mat-label>URL</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.url"
+        name="url"
+        type="text"
+        [errorStateMatcher]="videoEntryErrorMatcher"
+        [formControl]="urlFormControl"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="urlFormControl.hasError('required')">
+      Url is <strong>required</strong>
+    </mat-error>
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <textarea matInput [(ngModel)]="data.description" rows="5"> </textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="actions">
+  <button
+    mat-button
+    [mat-dialog-close]="data"
+    [disabled]="!(titleFormControl.valid && urlFormControl.valid)"
+  >
+    Ok
+  </button>
+</div>

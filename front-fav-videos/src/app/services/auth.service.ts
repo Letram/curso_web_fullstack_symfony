@@ -8,7 +8,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  
   constructor(private _http: HttpClient) {}
 
   private _loggedUser: User = null;
@@ -34,26 +33,33 @@ export class AuthService {
     this._loggedUser = data.decoded_data.user;
   }
 
+  public updateUserStored(user: User) {
+    let data = localStorage.getItem('decoded_token');
+    let parsed_data = JSON.parse(data);
+    parsed_data.user = user;
+    localStorage.setItem('decoded_token', JSON.stringify(parsed_data));
+  }
+
   public isLoggedIn(): boolean {
     let decoded_data = localStorage.getItem('decoded_token');
     if (!decoded_data) return false;
     let parsed_data = JSON.parse(decoded_data);
-    return parsed_data.exp >= new Date().getTime()/1000;
+    return parsed_data.exp >= new Date().getTime() / 1000;
   }
 
-  public getToken(): string{
-    return localStorage.getItem("token");
+  public getToken(): string {
+    return localStorage.getItem('token');
   }
 
   public getUser(): User {
-    if(!this.isLoggedIn())return null;
+    if (!this.isLoggedIn()) return null;
     let decoded_data = JSON.parse(localStorage.getItem('decoded_token'));
     return decoded_data.user;
   }
 
-  public logout(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("decoded_token");
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('decoded_token');
     this._loggedUser = null;
   }
 

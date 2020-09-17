@@ -37,16 +37,17 @@ export class AddVideoDialogComponent implements OnInit {
   private _regex = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
   public urlFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(this._regex)
+    Validators.pattern(this._regex),
   ]);
   constructor(
     private _dialogRef: MatDialogRef<AddVideoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string; url: string; description: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; url: string; description: string }
   ) {}
 
   ngOnInit(): void {}
 
-  onNoClick(){
+  onNoClick() {
     this._dialogRef.close();
   }
 }

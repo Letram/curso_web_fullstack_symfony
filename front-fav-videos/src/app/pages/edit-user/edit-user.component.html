@@ -1,6 +1,67 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <div class="header">
-        <h1 class="mat-h1">{{user.name}}, {{user.surname}}</h1>
-    </div>
+  <div class="header">
+    <h1 class="mat-h1">Perfil de {{ user.name }} {{ user.surname }}</h1>
+  </div>
+  <div class="content">
+    <form class="edit-form" #editUserForm="ngForm" (ngSubmit)="onEditSubmit()">
+      <mat-form-field class="form_param">
+        <mat-label>Email*</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          [formControl]="emailFormControl"
+          [errorStateMatcher]="editUserErrorMatcher"
+        />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form_param">
+        <mat-label>Nombre*</mat-label>
+        <input
+          matInput
+          type="text"
+          name="name"
+          [formControl]="nameFormControl"
+          [errorStateMatcher]="editUserErrorMatcher"
+        />
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form_param">
+        <mat-label>Apellidos</mat-label>
+        <input
+          matInput
+          type="text"
+          name="surname"
+          [(ngModel)]="surname"
+          [errorStateMatcher]="editUserErrorMatcher"
+        />
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [disabled]="
+          !(
+            emailFormControl.valid &&
+            nameFormControl.valid
+          )
+        "
+      >
+        Confirm changes
+      </button>
+    </form>
+  </div>
 </div>

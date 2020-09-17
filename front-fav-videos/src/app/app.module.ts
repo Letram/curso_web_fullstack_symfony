@@ -24,7 +24,8 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddVideoDialogComponent } from './components/add-video-dialog/add-video-dialog.component';
 import { VideoEntryComponent } from './components/video-entry/video-entry.component';
-import { VideoEntryDialogComponent } from './components/video-entry-dialog/video-entry-dialog.component'
+import { VideoEntryDialogComponent } from './components/video-entry-dialog/video-entry-dialog.component';
+import { YoutubeThumbnailPipe } from './pipes/youtube-thumbnail.pipe'
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { VideoEntryDialogComponent } from './components/video-entry-dialog/video
     AddVideoDialogComponent,
     VideoEntryComponent,
     VideoEntryDialogComponent,
+    YoutubeThumbnailPipe,
   ],
   imports: [
     BrowserModule,

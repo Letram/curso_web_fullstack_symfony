@@ -1,8 +1,56 @@
 <app-navbar (onVideoAdded)="onVideoAdded($event)"></app-navbar>
 <div class="video-container">
-  <span *ngIf="userVideos.length <= 0 && loading == false">No hay vídeos disponibles...</span>
-  <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+  <span *ngIf="userVideos.length <= 0 && loading == false"
+    >No hay vídeos disponibles...</span
+  >
   <div class="video-list">
-      <app-video-entry *ngFor="let video of userVideos" [video]="video"></app-video-entry>
+    <app-video-entry
+      *ngFor="let video of userVideos"
+      [video]="video"
+    ></app-video-entry>
   </div>
+  <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+</div>
+<div class="buttons">
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Video details icon"
+    class="details_btn"
+    [disabled]="currentPage <= 1"
+    (click)="getVideos(1)"
+  >
+    <mat-icon>first_page</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Video details icon"
+    class="details_btn"
+    [disabled]="currentPage <= 1"
+    (click)="getVideos(currentPage-1)"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Video details icon"
+    class="details_btn"
+    [disabled]="currentPage >= totalPages"
+    (click)="getVideos(currentPage+1)"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Video details icon"
+    class="details_btn"
+    [disabled]="currentPage >= totalPages"
+    (click)="getVideos(totalPages)"
+
+  >
+    <mat-icon>last_page</mat-icon>
+  </button>
 </div>

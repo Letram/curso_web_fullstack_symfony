@@ -1,0 +1,26 @@
+.mat-dialog-content {
+  display: flex;
+  height: 80%;
+  iframe {
+    flex-grow: 2;
+    width: 100%;
+    height: auto;
+  }
+  .video-info {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    mat-form-field {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      height: auto;
+      padding: 0 0.5rem;
+    }
+  }
+}
+
+.actions{
+    justify-content: center;
+}

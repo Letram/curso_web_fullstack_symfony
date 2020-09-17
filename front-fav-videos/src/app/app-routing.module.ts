@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'profile', component: EditUserComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: EditUserComponent, canActivate: [AuthGuard] },
   { path: '**', component: ErrorComponent },
 ];
 

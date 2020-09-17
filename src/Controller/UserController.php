@@ -45,6 +45,8 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, JwtAuth $auth)
     {
+        $request = $this->processRequest($request);
+
         $auth_token = $request->headers->get("Authorization");
 
         if (! isset($auth_token)) {
@@ -84,6 +86,7 @@ class UserController extends AbstractController
 
             //Recorremos todos los parámetros que queremos cambiar que están en la request y llamamos al setter de cada uno
             foreach ($params as $key => $value) {
+                if ($key == "id" || $key == "createdAt" || $key == "videos")continue;
                 call_user_func_array([$current_user, 'set'.ucfirst($key)], [$value]);
             }
             $entity_manager->flush();
@@ -94,6 +97,14 @@ class UserController extends AbstractController
             "status" => 1,
             "user" => $current_user,
         ], 200);
+    }
+
+    private function processRequest(Request $request){
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+        return $request;
     }
 
     /**

@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   public userVideos: Video[] = [];
   public loading: boolean = false;
+
+  public currentPage;
+  public totalPages;
+  public totalVideos;
+
   constructor(
     private _auth: AuthService,
     private _videoService: VideoService,
@@ -29,20 +34,24 @@ export class HomeComponent implements OnInit {
       });
       return;
     }
-    this.getVideos();
+    this.getVideos(1);
   }
 
   onVideoAdded(event){
-    console.log(event);
-    this.userVideos.push(event);
+    this.userVideos.unshift(event);
   }
 
-  getVideos(){
+  getVideos(page: number){
     this.loading = true;
-    this._videoService.getVideos(this._auth.getToken()).subscribe(
+    this._videoService.getVideos(this._auth.getToken(), page).subscribe(
       response => {
         console.log(response);
         this.userVideos = response.videos;
+        
+        this.currentPage = response.current_page;
+        this.totalPages = response.total_pages;
+        this.totalVideos = response.total_videos;
+
         this.loading = false;
       }
     );

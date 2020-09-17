@@ -207,7 +207,7 @@ class User implements JsonSerializable
             'surname' => $this->surname,
             'email' => $this->email,
             'role' => $this->role,
-            'created_at' => $this->createdAt,
+            'createdAt' => $this->createdAt,
             //'password'   => $this->password,
             'videos' => $this->videos->map(function (Video $video) {
                 $res = [];
@@ -216,8 +216,8 @@ class User implements JsonSerializable
                 $res['description'] = $video->getDescription();
                 $res['url'] = $video->getUrl();
                 $res['status'] = $video->getStatus();
-                $res['created_at'] = $video->getCreatedAt();
-                $res['updated_at'] = $video->getUpdatedAt();
+                $res['createdAt'] = $video->getCreatedAt();
+                $res['updatedAt'] = $video->getUpdatedAt();
                 $res['user_id'] = $video->getUser()->getId();
 
                 return $res;
