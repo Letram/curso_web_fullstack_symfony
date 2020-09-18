@@ -41,6 +41,11 @@ export class HomeComponent implements OnInit {
     this.userVideos.unshift(event);
   }
 
+  onVideoRemoved(video_id){
+    this.userVideos = this.userVideos.filter(video => video.id != video_id);
+    this._snackbar.open("Video quitado de la lista correctamente!");
+  }
+
   getVideos(page: number){
     this.loading = true;
     this._videoService.getVideos(this._auth.getToken(), page).subscribe(

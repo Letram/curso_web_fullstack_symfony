@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Video } from 'src/app/models/video';
@@ -19,6 +19,7 @@ export class VideoEntryComponent implements OnInit {
     private _auth: AuthService
   ) {}
   @Input() video: Video;
+  @Output() onVideoRemoved: EventEmitter<number> = new EventEmitter();
   ngOnInit(): void {}
 
   openVideoDetails() {
@@ -44,5 +45,14 @@ export class VideoEntryComponent implements OnInit {
             });
         }
       );
+  }
+  public removeVideo(){
+    this._videoService.removeVideo(this._auth.getToken(), this.video.id).subscribe(
+      response => {
+        if(response.status == 1)
+          this.onVideoRemoved.emit(this.video.id);
+      },
+      error => console.error(error)
+    );
   }
 }

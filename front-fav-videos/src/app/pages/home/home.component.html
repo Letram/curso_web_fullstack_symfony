@@ -4,10 +4,9 @@
     >No hay vídeos disponibles...</span
   >
   <div class="video-list">
-    <app-video-entry
-      *ngFor="let video of userVideos"
-      [video]="video"
-    ></app-video-entry>
+    <div class="app-video-entry" *ngFor="let video of userVideos">
+      <app-video-entry [video]="video" (onVideoRemoved)="onVideoRemoved($event)"></app-video-entry>
+    </div>
   </div>
   <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
 </div>
@@ -28,7 +27,7 @@
     aria-label="Video details icon"
     class="details_btn"
     [disabled]="currentPage <= 1"
-    (click)="getVideos(currentPage-1)"
+    (click)="getVideos(currentPage - 1)"
   >
     <mat-icon>chevron_left</mat-icon>
   </button>
@@ -38,7 +37,7 @@
     aria-label="Video details icon"
     class="details_btn"
     [disabled]="currentPage >= totalPages"
-    (click)="getVideos(currentPage+1)"
+    (click)="getVideos(currentPage + 1)"
   >
     <mat-icon>chevron_right</mat-icon>
   </button>
@@ -49,7 +48,6 @@
     class="details_btn"
     [disabled]="currentPage >= totalPages"
     (click)="getVideos(totalPages)"
-
   >
     <mat-icon>last_page</mat-icon>
   </button>

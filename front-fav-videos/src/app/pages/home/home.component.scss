@@ -1,3 +1,11 @@
+.app-video-entry{
+    margin: 0.25rem 0.5rem 0 0.5rem;
+    &+.app-video-entry{
+        margin-top: 0.5rem;
+    }
+}
+
+
 .buttons{
     height: 5rem;
     display: flex;

@@ -1,25 +1,36 @@
 <mat-card>
-  <img class="card-thumb" [src]="video.url | youtubeThumbnail" alt="" />
-  <div class="card-content">
-    <div class="video-info">
-      <mat-card-title>
-        {{ video.title }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ video.url }}
-      </mat-card-subtitle>
-      <mat-card-content>
-        {{ video.description }}
-      </mat-card-content>
-    </div>
+  <mat-card-title color="primary">
+    {{ video.title }}
     <button
-      mat-icon-button
-      color="primary"
-      aria-label="Video details icon"
-      (click)="openVideoDetails()"
-      class="details_btn"
-    >
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+        mat-icon-button
+        color="accent"
+        aria-label="Remove Video"
+        (click)="removeVideo()"
+        class="details_btn"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+  </mat-card-title>
+  <div class="card-body">
+    <img class="card-thumb" [src]="video.url | youtubeThumbnail" alt="" />
+    <div class="card-content">
+      <div class="video-info">
+        <mat-card-subtitle>
+          {{ video.url }}
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{ video.description }}
+        </mat-card-content>
+      </div>
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Video details icon"
+        (click)="openVideoDetails()"
+        class="details_btn"
+      >
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
   </div>
 </mat-card>
